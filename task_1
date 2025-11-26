@@ -1,0 +1,46 @@
+{
+    public interface Worker
+    {
+        void Work();
+    }
+    public interface ICharger
+    {
+        void Charge();
+    }
+
+    public class Robot : Worker, ICharger
+    {
+        public string Name { get; private set; }
+        public int Energy { get; private set; }
+
+        public Robot(string name)
+        {
+            Name = name;
+            Energy = 100; 
+        }
+
+        public void Work()
+        {
+            Energy = Math.Max(0, Energy - 20);
+            Console.WriteLine($"{Name}: Выполняет работу. Текущая энергия: {Energy}");
+        }
+
+        public void Charge()
+        {
+            Energy = Math.Min(100, Energy + 50);
+            Console.WriteLine($"{Name}: Заряжается. Текущая энергия: {Energy}");
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Robot robot = new Robot("КЕК 30");
+            robot.Work();
+            robot.Work();
+            robot.Charge();
+            robot.Work();
+            Console.ReadLine();
+        }
+    }
+}
